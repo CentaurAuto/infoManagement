@@ -1,0 +1,28 @@
+<div style="font-size:45">
+<h1>{{ vehicle.vehicle_id }}</h1>
+<ul>
+	<li>Customer Name : {{vehicle.customer_name}}</li>
+	<li>Mail-ID : {{vehicle.customer_mail_id}}</li>
+	<li>Phone : {{vehicle.customer_phone_number}}</li>
+	<li>Location : {{vehicle.customer_latitude}} lat , {{vehicle.customer_longitude}} long</li>
+	<li>Date of Purchase : {{vehicle.customer_purchase_date}}</li>
+	<li>Distance ridden : {{vehicle.distance_rode}} Kms</li>
+	<li>Battery SOH : {{vehicle.battery_soh}} %</li>
+	<div style="display:inline">
+		<p>System 1 status : {{system_status.0}}</p>
+		<p>System 2 status : {{system_status.1}}</p>
+		<p>System 3 status : {{system_status.2}}</p>
+		<p>System 4 status : {{system_status.3}}</p>
+		<p>System 5 status : {{system_status.4}}</p>
+		<p>System 6 status : {{system_status.5}}</p>
+		<p>System 7 status : {{system_status.6}}</p>
+	</div>
+</ul>
+
+
+<li style="text-align:center"><a href="{% url 'index' %}">Home</a></li>
+<br>
+<li style="text-align:center"><a href="{% url 'service' vehicle.vehicle_id %}">Service</a></li>
+<br>
+<li style="text-align:center"><a href="{% url 'requestPage' vehicle.vehicle_id %}">Request</a></li>
+</div>

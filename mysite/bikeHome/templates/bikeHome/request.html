@@ -1,0 +1,19 @@
+
+<div style="font-size:45">
+<form action="{% url 'requestPage' vehicle.vehicle_id %}" method="post">{% csrf_token %}
+<ul>
+	{{form.as_ul}}
+</ul>
+	
+<input type="submit" name="submit" value="report">
+
+</form>
+
+
+
+<li style="text-align:center"><a href="{% url 'index' %}">Home</a></li>
+<br>
+<li style="text-align:center"><a href="{% url 'dashboard' vehicle.vehicle_id %}">Dashboard</a></li>
+<br>
+<li style="text-align:center"><a href="{% url 'service' vehicle.vehicle_id %}">Service</a></li>
+</div>	

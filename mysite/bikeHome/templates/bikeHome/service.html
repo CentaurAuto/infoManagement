@@ -1,0 +1,15 @@
+<div style="font-size:45">
+<h1>{{ vehicle.vehicle_id }}</h1>
+<ul>
+	<li>Services finished : {{vehicle.service_status}}</li>
+	<li>KMS to next service : {{vehicle.kms_to_next_service}} kms</li>
+	<li>Time to next service : {{vehicle.time_to_next_service}} days</li>
+</ul>
+
+
+<li style="text-align:center"><a href="{% url 'index' %}">Home</a></li>
+<br>
+<li style="text-align:center"><a href="{% url 'dashboard' vehicle.vehicle_id %}">Dashboard</a></li>
+<br>
+<li style="text-align:center"><a href="{% url 'requestPage' vehicle.vehicle_id %}">Request</a></li>
+</div>
