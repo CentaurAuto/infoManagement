@@ -1,0 +1,12 @@
+<div style="font-size:45">
+{% if latest_vehicles_list %}
+	<ul>
+	{% for vehicle in latest_vehicles_list %}
+		<li><a href="{% url 'dashboard' vehicle.vehicle_id%}">{{vehicle.vehicle_id}}</a></li>
+	{% endfor %}
+			
+	</ul>
+{% else %}
+	<p>No vehicles are registered.</p>
+{% endif %}
+</div>

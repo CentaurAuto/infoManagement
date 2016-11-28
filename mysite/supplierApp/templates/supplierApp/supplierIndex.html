@@ -1,0 +1,12 @@
+<div style="font-size:45">
+{% if supplier_list %}
+	<ul>
+	{% for supplier in supplier_list %}
+		<li><a href="{% url 'supplierDashboard' supplier.supplier_id%}">{{supplier.supplier_id}}</a></li>
+	{% endfor %}
+			
+	</ul>
+{% else %}
+	<p>No suppliers are registered.</p>
+{% endif %}
+</div>

@@ -14,7 +14,7 @@ from django.template import RequestContext
 def index(request):
 	latest_vehicles_list=Vehicle.objects.order_by('-customer_purchase_date')[:10]
 	context={'latest_vehicles_list':latest_vehicles_list,}
-	return render(request,'bikeHome/index.html',context)
+	return render(request,'bikeHome/bikeHomeIndex.html',context)
 
 def dashboard(request,vehicle_id):
 	vehicle=get_object_or_404(Vehicle,vehicle_id=vehicle_id)
