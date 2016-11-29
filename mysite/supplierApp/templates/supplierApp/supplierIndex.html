@@ -1,8 +1,18 @@
+<style type="text/css">
+	a{
+		text-decoration: none;
+		color:#30627E;
+	}
+	a:hover{
+		color:#00ffbc;
+	}
+</style>
+
 <div style="font-size:45">
 {% if supplier_list %}
 	<ul>
 	{% for supplier in supplier_list %}
-		<li><a href="{% url 'supplierDashboard' supplier.supplier_id%}">{{supplier.supplier_id}}</a></li>
+		<li><a href="{% url 'supplierDashboard' supplier.supplier_id%}">{{supplier.supplier_id}} - {{supplier.supplier_name}}</a></li>
 	{% endfor %}
 			
 	</ul>

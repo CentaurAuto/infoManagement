@@ -1,3 +1,15 @@
+<style type="text/css">
+	*{
+		color:#30627E;
+	}
+	a{
+		text-decoration: none;
+		color:#30627E;
+	}
+	a:hover{
+		color:#00ffbc;
+	}
+</style>
 <div style="font-size:25">
 <h1>{{ supplier.supplier_id }}</h1>
 <ul>
@@ -23,4 +35,10 @@
 	    </div>
 	{% endfor %}
 	</div>
+	<br>
+	<br>
+	<div style="font-size:45;text-align:center">
+		<a href="{% url 'supplierIndex' %}">Home</a>
+	</div>
 </div>
+

@@ -11,6 +11,9 @@ from django.template import RequestContext
 # Create your views here.
 @csrf_protect
 
+def mainIndex(request):
+	return render(request,'bikeHome/index.html')
+
 def index(request):
 	latest_vehicles_list=Vehicle.objects.order_by('-customer_purchase_date')[:10]
 	context={'latest_vehicles_list':latest_vehicles_list,}

@@ -1,5 +1,18 @@
+<style type="text/css">
+	*{
+		color:#30627E;
+	}
 
-<div style="font-size:45">
+	a{
+		text-decoration: none;
+		color:#30627E;
+	}
+	a:hover{
+		color:#00ffbc;
+	}
+	
+</style>
+<div style="font-size:25">
 <form action="{% url 'requestPage' vehicle.vehicle_id %}" method="post">{% csrf_token %}
 <ul>
 	{{form.as_ul}}

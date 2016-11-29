@@ -1,8 +1,18 @@
-<div style="font-size:45">
+<style type="text/css">
+	a{
+		text-decoration: none;
+		color:#30627E;
+	}
+	a:hover{
+		color:#00ffbc;
+	}
+</style>
+
+<div style="font-size:25">
 {% if latest_vehicles_list %}
 	<ul>
 	{% for vehicle in latest_vehicles_list %}
-		<li><a href="{% url 'dashboard' vehicle.vehicle_id%}">{{vehicle.vehicle_id}}</a></li>
+		<li><a href="{% url 'dashboard' vehicle.vehicle_id%}">{{vehicle.vehicle_id}} - {{vehicle.customer_name}}</a></li>
 	{% endfor %}
 			
 	</ul>
