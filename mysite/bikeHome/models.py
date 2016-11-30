@@ -9,8 +9,56 @@ now=datetime.now(timezone.utc)
 
 # Create your models here.
 
+class System(models.Model):
+	system_name=models.CharField(max_length=30)
+	system_id=models.CharField(max_length=11)
+
+
+	def __str__(self):
+		return self.system_name
+
+class SubSystem(models.Model):
+	system=models.ForeignKey(System,on_delete=models.CASCADE)
+	subsystem_name=models.CharField(max_length=30)
+
+	def __str__(self):
+		return self.subsystem_name
+
+
+class Supplier(models.Model):
+	supplier_name=models.CharField(max_length=20)
+	system=models.ManyToManyField(System)
+	supplier_id=models.CharField(max_length=11,primary_key=True)
+	supplier_mail_id=models.EmailField(max_length=30)
+	supplier_phone_number=models.CharField(max_length=15)
+	supplier_latitude=models.DecimalField(max_digits=8,decimal_places=6)
+	supplier_longitude=models.DecimalField(max_digits=8,decimal_places=6)
+
+	def __str__(self):
+		return self.supplier_name
+
+class Batch(models.Model):
+	order_no=models.CharField(max_length=20)
+	supplier=models.ForeignKey(Supplier,on_delete=models.CASCADE)
+	system=models.OneToOneField(System)
+	order_lead_time=models.DecimalField(max_digits=10,decimal_places=3)
+	order_volume_per_unit=models.DecimalField(max_digits=10,decimal_places=3)
+	order_MOQ=models.IntegerField(default=100)
+	order_cost_per_system=models.DecimalField(max_digits=10,decimal_places=3)
+	ordered_quantity=models.IntegerField(default=100)
+	order_ETA=models.DecimalField(max_digits=10,decimal_places=3)
+	order_received=models.BooleanField(default=False)
+	rejected_quantity=models.IntegerField(default=0)
+	class Meta:
+		verbose_name_plural = "Batches"
+
+	def __str__(self):
+		return self.order_no
+
+
 class Vehicle(models.Model):
-	vehicle_id=models.CharField(max_length=11,primary_key=True)
+	vehicle_id=models.CharField(max_length=20,primary_key=True)
+	batch=models.ManyToManyField(Batch)
 	customer_name=models.CharField(max_length=30)
 	customer_mail_id=models.EmailField(max_length=30)
 	customer_phone_number=models.CharField(max_length=15)
@@ -56,50 +104,9 @@ class Vehicle(models.Model):
 	subsystem_7a=models.BooleanField(default=True)
 	subsystem_7b=models.BooleanField(default=True)
 	subsystem_7c=models.BooleanField(default=True)
-
-	supplier_1_choices = (
-    ('s1a', 'name#s1a'),
-    ('s1b', 'name#s1b'),
-    ('s1c', 'name#s1c'),
-	)
-	supplier_2_choices = (
-    ('s2a', 'name#s2a'),
-    ('s2b', 'name#s2b'),
-    ('s2c', 'name#s2c'),
-	)	
-	supplier_3_choices = (
-    ('s3a', 'name#s3a'),
-    ('s3b', 'name#s3b'),
-    ('s3c', 'name#s3c'),
-	)
-	supplier_4_choices = (
-    ('s4a', 'name#s4a'),
-    ('s4b', 'name#s4b'),
-    ('s4c', 'name#s4c'),
-	)
-	supplier_5_choices = (
-    ('s5a', 'name#s5a'),
-    ('s5b', 'name#s5b'),
-    ('s5c', 'name#s5c'),
-	)
-	supplier_6_choices = (
-    ('s6a', 'name#s6a'),
-    ('s6b', 'name#s6b'),
-    ('s6c', 'name#s6c'),
-	)
-	supplier_7_choices = (
-    ('s7a', 'name#s7a'),
-    ('s7b', 'name#s7b'),
-    ('s7c', 'name#s7c'),
-	)			
-
-	system_1_supplier=models.CharField(max_length=3,choices=supplier_1_choices,default='s1a')
-	system_2_supplier=models.CharField(max_length=3,choices=supplier_2_choices,default='s2a')
-	system_3_supplier=models.CharField(max_length=3,choices=supplier_3_choices,default='s3a')
-	system_4_supplier=models.CharField(max_length=3,choices=supplier_4_choices,default='s4a')
-	system_5_supplier=models.CharField(max_length=3,choices=supplier_5_choices,default='s5a')
-	system_6_supplier=models.CharField(max_length=3,choices=supplier_6_choices,default='s6a')
-	system_7_supplier=models.CharField(max_length=3,choices=supplier_7_choices,default='s7a')
+	subsystem_8a=models.BooleanField(default=True)
+	subsystem_8b=models.BooleanField(default=True)
+	subsystem_8c=models.BooleanField(default=True)	
 
 	def system_1(self):
 		if not self.subsystem_1a or not self.subsystem_1b or not self.subsystem_1c:
@@ -141,7 +148,11 @@ class Vehicle(models.Model):
 		if not self.subsystem_7a or not self.subsystem_7b or not self.subsystem_7c:
 			return False
 		else:
+			return True
+
+	def system_8(self):
+		if not self.subsystem_8a or not self.subsystem_8b or not self.subsystem_8c:
+			return False
+		else:
 			return True				
-
-
 

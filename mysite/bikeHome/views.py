@@ -1,12 +1,16 @@
 from django.shortcuts import render,get_object_or_404,render_to_response
 from django.http import HttpResponseRedirect
-from .models import Vehicle
+from .models import Vehicle,Supplier,System
 from django.template import loader
 from django.urls import reverse
 from django.views import generic
 from forms import VehicleForm
 from django.views.decorators.csrf import csrf_protect
 from django.template import RequestContext
+from django.shortcuts import render,get_object_or_404
+
+# Create your views here.
+
 
 # Create your views here.
 @csrf_protect
@@ -21,13 +25,13 @@ def index(request):
 
 def dashboard(request,vehicle_id):
 	vehicle=get_object_or_404(Vehicle,vehicle_id=vehicle_id)
-	system_status=[vehicle.system_1(),vehicle.system_2(),vehicle.system_3(),vehicle.system_4(),vehicle.system_5(),vehicle.system_6(),vehicle.system_7()]
+	system_status=[vehicle.system_1(),vehicle.system_2(),vehicle.system_3(),vehicle.system_4(),vehicle.system_5(),vehicle.system_6(),vehicle.system_7(),vehicle.system_8()]
 	for item in range(0,len(system_status)):
 		if system_status[item]==True:
 			system_status[item]='Good'
 		else:
 			system_status[item]='Bad'
-	return render(request,'bikeHome/dashboard.html',{'vehicle':vehicle,'system_status':system_status})
+	return render(request,'bikeHome/dashboardVehicle.html',{'vehicle':vehicle,'system_status':system_status})
 	
 	
 def service(request,vehicle_id):
@@ -48,3 +52,11 @@ def requestPage(request,vehicle_id):
 	
 	return render(request,'bikeHome/request.html',{'vehicle':vehicle,'form':form})	
 
+def supplierIndex(request):
+	supplier_list=Supplier.objects.all()
+	context={'supplier_list':supplier_list,}
+	return render(request,'bikeHome/indexSupplier.html',context)
+
+def supplierDashboard(request,supplier_id):
+	supplier=get_object_or_404(Supplier,supplier_id=supplier_id)
+	return render(request,'bikeHome/dashboardSupplier.html',{'supplier':supplier})
