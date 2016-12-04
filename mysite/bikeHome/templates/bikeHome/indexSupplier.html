@@ -1,3 +1,5 @@
+
+
 <style type="text/css">
 	a{
 		text-decoration: none;
@@ -9,14 +11,26 @@
 </style>
 
 <div style="font-size:45">
-{% if supplier_list %}
+{% if main_list %}
 	<ul>
-	{% for supplier in supplier_list %}
+	{% for supplier,batches,systems in main_list %}
 		<li><a href="{% url 'supplierDashboard' supplier.supplier_id%}">{{supplier.supplier_id}} - {{supplier.supplier_name}}</a></li>
+		<ul>
+			{% for system in systems %}
+				
+						<li>System name : {{system.0}}</li>
+						<li>Total vehicles : {{system.1}}</li>
+						<li>Vehicles with system issues : {{system.2}}</li>
+						<br>
+				
+			{% endfor %}
+		</ul>
 	{% endfor %}
 			
 	</ul>
 {% else %}
 	<p>No suppliers are registered.</p>
 {% endif %}
+
+
 </div>
